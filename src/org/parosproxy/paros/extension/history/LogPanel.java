@@ -1,20 +1,20 @@
 /*
- * Created on 2004¦~7¤ë4¤é
+ * Created on 2004Ò´7êÅ4ìí
  *
  * Paros and its related class files.
- * 
+ *
  * Paros is an HTTP/HTTPS proxy for assessing web application security.
  * Copyright (C) 2003-2004 Chinotec Technologies Company
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the Clarified Artistic License
  * as published by the Free Software Foundation.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * Clarified Artistic License for more details.
- * 
+ *
  * You should have received a copy of the Clarified Artistic License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -42,11 +42,11 @@ import org.parosproxy.paros.view.View;
 public class LogPanel extends AbstractPanel implements Runnable {
 	private javax.swing.JScrollPane scrollLog = null;
 	private javax.swing.JList listLog = null;
-	
+
 	private HttpPanel requestPanel = null;
 	private HttpPanel responsePanel = null;
     private ExtensionHistory extension = null;
-	
+
 	/**
 	 * This is the default constructor
 	 */
@@ -56,7 +56,7 @@ public class LogPanel extends AbstractPanel implements Runnable {
 	}
 	/**
 	 * This method initializes this
-	 * 
+	 *
 	 * @return void
 	 */
 	private  void initialize() {
@@ -64,20 +64,20 @@ public class LogPanel extends AbstractPanel implements Runnable {
 		this.setSize(600, 200);
 		this.add(getScrollLog(), java.awt.BorderLayout.CENTER);
 	}
-    
+
     void setExtension(ExtensionHistory extension) {
         this.extension = extension;
     }
-    
+
 	/**
 
-	 * This method initializes scrollLog	
+	 * This method initializes scrollLog
 
-	 * 	
+	 *
 
-	 * @return javax.swing.JScrollPane	
+	 * @return javax.swing.JScrollPane
 
-	 */    
+	 */
 	private javax.swing.JScrollPane getScrollLog() {
 		if (scrollLog == null) {
 			scrollLog = new javax.swing.JScrollPane();
@@ -92,13 +92,13 @@ public class LogPanel extends AbstractPanel implements Runnable {
 
 	/**
 
-	 * This method initializes listLog	
+	 * This method initializes listLog
 
-	 * 	
+	 *
 
-	 * @return javax.swing.JList	
+	 * @return javax.swing.JList
 
-	 */    
+	 */
 	public javax.swing.JList getListLog() {
 		if (listLog == null) {
 			listLog = new javax.swing.JList();
@@ -107,27 +107,27 @@ public class LogPanel extends AbstractPanel implements Runnable {
 			listLog.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 			listLog.setName("ListLog");
 			listLog.setFont(new java.awt.Font("Default", java.awt.Font.PLAIN, 12));
-			listLog.addMouseListener(new java.awt.event.MouseAdapter() { 
-				public void mousePressed(java.awt.event.MouseEvent e) {    
+			listLog.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mousePressed(java.awt.event.MouseEvent e) {
 				    if ((e.getModifiers() & InputEvent.BUTTON3_MASK) != 0) {  // right mouse button
 				        View.getSingleton().getPopupMenu().show(e.getComponent(), e.getX(), e.getY());
 				        return;
-				    }	
-				    
+				    }
+
 				    if ((e.getModifiers() & InputEvent.BUTTON1_MASK) != 0 && e.getClickCount() > 1) {  // double click
 						requestPanel.setTabFocus();
 						return;
 				    }
 				}
 			});
-			
-			listLog.addListSelectionListener(new javax.swing.event.ListSelectionListener() { 
+
+			listLog.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
 
 				public void valueChanged(javax.swing.event.ListSelectionEvent e) {
 				    if (listLog.getSelectedValue() == null) {
 				        return;
 				    }
-                    
+
 					final HistoryReference historyRef = (HistoryReference) listLog.getSelectedValue();
 
                     readAndDisplay(historyRef);
@@ -140,7 +140,7 @@ public class LogPanel extends AbstractPanel implements Runnable {
 		}
 		return listLog;
 	}
-	
+
 //    private void readAndDisplay(HistoryReference historyRef) {
 //
 //        HttpMessage msg = null;
@@ -151,7 +151,7 @@ public class LogPanel extends AbstractPanel implements Runnable {
 //            } else {
 //                requestPanel.setMessage(msg, true);
 //            }
-//            
+//
 //            if (msg.getResponseHeader().isEmpty()) {
 //                responsePanel.setMessage(null, false);
 //            } else {
@@ -160,16 +160,16 @@ public class LogPanel extends AbstractPanel implements Runnable {
 //        } catch (Exception e1) {
 //            e1.printStackTrace();
 //        }
-//        
+//
 //    }
 
-    
 
-    
+
+
     private Vector displayQueue = new Vector();
     private Thread thread = null;
     private LogPanelCellRenderer logPanelCellRenderer = null;  //  @jve:decl-index=0:visual-constraint="10,304"
-    
+
     private void readAndDisplay(final HistoryReference historyRef) {
 
         synchronized(displayQueue) {
@@ -184,32 +184,32 @@ public class LogPanel extends AbstractPanel implements Runnable {
             displayQueue.add(historyRef);
 
         }
-        
+
         if (thread != null && thread.isAlive()) {
             return;
         }
-        
+
         thread = new Thread(this);
 
         thread.setPriority(Thread.NORM_PRIORITY);
         thread.start();
     }
-    
-    
+
+
     public void setDisplayPanel(HttpPanel requestPanel, HttpPanel responsePanel) {
         this.requestPanel = requestPanel;
         this.responsePanel = responsePanel;
 
     }
-    
+
     private void displayMessage(HttpMessage msg) {
-        
+
         if (msg.getRequestHeader().isEmpty()) {
             requestPanel.setMessage(null, true);
         } else {
             requestPanel.setMessage(msg, true);
         }
-        
+
         if (msg.getResponseHeader().isEmpty()) {
             responsePanel.setMessage(null, false);
         } else {
@@ -220,18 +220,18 @@ public class LogPanel extends AbstractPanel implements Runnable {
     public void run() {
         HistoryReference ref = null;
         int count = 0;
-        
+
         do {
             synchronized(displayQueue) {
                 count = displayQueue.size();
                 if (count == 0) {
                     break;
                 }
-                
+
                 ref = (HistoryReference) displayQueue.get(0);
                 displayQueue.remove(0);
             }
-            
+
             try {
                 final HistoryReference finalRef = ref;
                 final HttpMessage msg = ref.getHttpMessage();
@@ -243,31 +243,31 @@ public class LogPanel extends AbstractPanel implements Runnable {
 
                     }
                 });
-                
+
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-            
+
             // wait some time to allow another selection event to be triggered
             try {
                 Thread.sleep(200);
             } catch (Exception e) {}
         } while (true);
-        
-        
+
+
     }
-    
+
     private void checkAndShowBrowser(HistoryReference ref, HttpMessage msg) {
         if (!ExtensionHistory.isEnableForNativePlatform() || !extension.getBrowserDialog().isVisible()) {
             return;
         }
-        
+
         extension.browserDisplay(ref, msg);
     }
     /**
-     * This method initializes logPanelCellRenderer	
-     * 	
-     * @return org.parosproxy.paros.extension.history.LogPanelCellRenderer	
+     * This method initializes logPanelCellRenderer
+     *
+     * @return org.parosproxy.paros.extension.history.LogPanelCellRenderer
      */
     private LogPanelCellRenderer getLogPanelCellRenderer() {
         if (logPanelCellRenderer == null) {
@@ -279,6 +279,6 @@ public class LogPanel extends AbstractPanel implements Runnable {
         return logPanelCellRenderer;
     }
 
-    
+
 }
 

@@ -1,15 +1,15 @@
 /*
- * Created on 2004¶~7§Î23§È
+ * Created on 2004“¥7Í≈23ÏÌ
  *
  * Paros and its related class files.
- * 
+ *
  * Paros is an HTTP/HTTPS proxy for assessing web application security.
  * Copyright (C) 2003-2004 Chinotec Technologies Company
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the Clarified Artistic License
  * as published by the Free Software Foundation.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -57,7 +57,7 @@ public class HistoryFilterDialog extends AbstractDialog {
 	private JPanel jPanel1 = null;
 	private int exitResult = JOptionPane.CANCEL_OPTION;
 
-	
+
 	private JButton btnReset = null;
 	private JPanel jPanel2 = null;
 	private JRadioButton radioExact = null;
@@ -82,7 +82,7 @@ public class HistoryFilterDialog extends AbstractDialog {
 
 	/**
 	 * This method initializes this
-	 * 
+	 *
 	 * @return void
 	 */
 	private void initialize() {
@@ -94,7 +94,7 @@ public class HistoryFilterDialog extends AbstractDialog {
         centreDialog();
         txtPattern.requestFocus();
         this.getRootPane().setDefaultButton(btnApply);
-        //  Handle escape key to close the dialog    
+        //  Handle escape key to close the dialog
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         AbstractAction escapeAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -105,12 +105,12 @@ public class HistoryFilterDialog extends AbstractDialog {
         getRootPane().getActionMap().put("ESCAPE",escapeAction);
         this.pack();
 	}
-	
+
 	/**
-	 * This method initializes jPanel	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */    
+	 * This method initializes jPanel
+	 *
+	 * @return javax.swing.JPanel
+	 */
 	private JPanel getJPanel() {
 		if (jPanel == null) {
 			GridBagConstraints gridBagConstraints12 = new GridBagConstraints();
@@ -177,10 +177,10 @@ public class HistoryFilterDialog extends AbstractDialog {
 		return jPanel;
 	}
 	/**
-	 * This method initializes btnApply	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */    
+	 * This method initializes btnApply
+	 *
+	 * @return javax.swing.JButton
+	 */
 	private JButton getBtnApply() {
 		if (btnApply == null) {
 			btnApply = new JButton();
@@ -188,9 +188,9 @@ public class HistoryFilterDialog extends AbstractDialog {
 //			btnApply.setPreferredSize(new java.awt.Dimension(70,30));
 //			btnApply.setMaximumSize(new java.awt.Dimension(100,35));
 //			btnApply.setMinimumSize(new java.awt.Dimension(63,30));
-			btnApply.addActionListener(new java.awt.event.ActionListener() { 
+			btnApply.addActionListener(new java.awt.event.ActionListener() {
 
-				public void actionPerformed(java.awt.event.ActionEvent e) {    
+				public void actionPerformed(java.awt.event.ActionEvent e) {
 
 				    try {
 				        Pattern pattern = Pattern.compile(getPattern());
@@ -200,7 +200,7 @@ public class HistoryFilterDialog extends AbstractDialog {
 				    }
 				    exitResult = JOptionPane.OK_OPTION;
 				    HistoryFilterDialog.this.dispose();
-					
+
 				}
 			});
 
@@ -208,15 +208,15 @@ public class HistoryFilterDialog extends AbstractDialog {
 		return btnApply;
 	}
 	/**
-	 * This method initializes btnCancel	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */    
+	 * This method initializes btnCancel
+	 *
+	 * @return javax.swing.JButton
+	 */
 	private JButton getBtnCancel() {
 		if (btnCancel == null) {
 			btnCancel = new JButton();
 			btnCancel.setText("Cancel");
-			btnCancel.addActionListener(new java.awt.event.ActionListener() { 
+			btnCancel.addActionListener(new java.awt.event.ActionListener() {
 
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 
@@ -230,10 +230,10 @@ public class HistoryFilterDialog extends AbstractDialog {
 		return btnCancel;
 	}
 	/**
-	 * This method initializes txtPattern	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */    
+	 * This method initializes txtPattern
+	 *
+	 * @return javax.swing.JTextField
+	 */
 	private JTextField getTxtPattern() {
 		if (txtPattern == null) {
 			txtPattern = new JTextField();
@@ -241,10 +241,10 @@ public class HistoryFilterDialog extends AbstractDialog {
 		return txtPattern;
 	}
 	/**
-	 * This method initializes jPanel1	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */    
+	 * This method initializes jPanel1
+	 *
+	 * @return javax.swing.JPanel
+	 */
 	private JPanel getJPanel1() {
 		if (jPanel1 == null) {
 			jPanel1 = new JPanel();
@@ -258,31 +258,31 @@ public class HistoryFilterDialog extends AbstractDialog {
 	    this.setVisible(true);
 	    return exitResult;
 	}
-	
+
 	public String getPattern() {
 	    String result = "";
 	    if (getRadioRegex().isSelected()) {
 	        result = getTxtPattern().getText();
 	    } else if (getRadioExact().isSelected()) {
 	        result = "\\Q" + getTxtPattern().getText() + "\\E";
-	        
+
 	    }
 	    return result;
 	}
-	
+
 
 	/**
-	 * This method initializes btnReset	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */    
+	 * This method initializes btnReset
+	 *
+	 * @return javax.swing.JButton
+	 */
 	private JButton getBtnReset() {
 		if (btnReset == null) {
 			btnReset = new JButton();
 			btnReset.setText("Reset filter");
-			btnReset.addActionListener(new java.awt.event.ActionListener() { 
+			btnReset.addActionListener(new java.awt.event.ActionListener() {
 
-				public void actionPerformed(java.awt.event.ActionEvent e) {    
+				public void actionPerformed(java.awt.event.ActionEvent e) {
 
 					exitResult = JOptionPane.NO_OPTION;
 					txtPattern.setText("");
@@ -294,10 +294,10 @@ public class HistoryFilterDialog extends AbstractDialog {
 		return btnReset;
 	}
 	/**
-	 * This method initializes jPanel2	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */    
+	 * This method initializes jPanel2
+	 *
+	 * @return javax.swing.JPanel
+	 */
 	private JPanel getJPanel2() {
 		if (jPanel2 == null) {
 			GridLayout gridLayout3 = new GridLayout();
@@ -313,10 +313,10 @@ public class HistoryFilterDialog extends AbstractDialog {
 		return jPanel2;
 	}
 	/**
-	 * This method initializes radioExact	
-	 * 	
-	 * @return javax.swing.JRadioButton	
-	 */    
+	 * This method initializes radioExact
+	 *
+	 * @return javax.swing.JRadioButton
+	 */
 	private JRadioButton getRadioExact() {
 		if (radioExact == null) {
 			radioExact = new JRadioButton();
@@ -326,10 +326,10 @@ public class HistoryFilterDialog extends AbstractDialog {
 		return radioExact;
 	}
 	/**
-	 * This method initializes radioRegex	
-	 * 	
-	 * @return javax.swing.JRadioButton	
-	 */    
+	 * This method initializes radioRegex
+	 *
+	 * @return javax.swing.JRadioButton
+	 */
 	private JRadioButton getRadioRegex() {
 		if (radioRegex == null) {
 			radioRegex = new JRadioButton();
